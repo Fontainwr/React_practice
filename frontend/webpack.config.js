@@ -14,35 +14,7 @@ module.exports = (env) => {
     },
     module: {
       rules: [
-        {
-          test: /\.(js|jsx)$/,
-          exclude: /node_modules/,
-          use: {
-            loader: "babel-loader",
-          },
-        },
-        {
-          test: /\.m?\js$/,
-          exclude: /(node_modules|bower_components)/,
-          use: {
-            loader: "babel-loader",
-            options: {
-              presets: ["@babel/preset-env"],
-              plugins: [
-                ["@babel/plugin-proposal-class-properties", { loose: true }],
-                "@babel/plugin-transform-runtime",
-              ],
-            },
-          },
-        },
-        {
-          test: /\.s[ac]ss$/i,
-          use: ["style-loader", "css-loader", "sass-loader"],
-        },
-        {
-          test: /\.css$/i,
-          use: ["style-loader", "css-loader"],
-        },
+        // ... your rules
       ],
     },
     plugins: [
@@ -52,10 +24,6 @@ module.exports = (env) => {
         template: "./src/index.html",
       }),
     ],
-    output: {
-      filename: "[name].bundle.js",
-      path: path.resolve(__dirname, "build"),
-    },
     optimization: {
       splitChunks: {
         chunks: "all",
@@ -64,15 +32,13 @@ module.exports = (env) => {
   };
 
   const dev = {
-    output: {
-      filename: "dev.js",
-      path: path.resolve(__dirname, "dev"),
-    },
     mode: "development",
     devtool: "inline-source-map",
     devServer: {
-      contentBase: "./dev",
-      port: process.env.PORT,
+      static: {
+        directory: path.resolve(__dirname, "dev"),
+      },
+      port: process.env.PORT || 4000,
     },
   };
 
