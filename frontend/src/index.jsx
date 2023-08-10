@@ -4,7 +4,7 @@ import "./styles.css";
 import App from "./components/App";
 import { createRoot } from "react-dom";
 import { BrowserRouter as Router } from "react-router-dom";
-import { AppState } from "./AppState"; // Corrected the import statement
+import { AppState } from "./AppState.jsx"; // Corrected the import statement
 
 ReactDOM.render(
   <AppState>
